@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MathdokuSolver</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="plus">\u002B</string>
+    <string name="times">\u00D7</string>
+    <string name="div">\u00F7</string>
+    <string name="minus">\u2212</string>
+    <string name="equals"></string>
+    <string name="undo">\u2326</string>
+    <string name="ALLDIFF"></string>
+</resources>

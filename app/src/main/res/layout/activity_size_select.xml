@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:screenOrientation="portrait"
+    tools:context="com.bradym.android.kenkensolver.SizeSelect">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="4 x 4"
+            android:tag="4"
+            android:id="@+id/button4x4"
+            android:layout_alignParentTop="true"
+            android:onClick="switchToGrid"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="5 x 5"
+            android:tag="5"
+            android:id="@+id/button5x5"
+            android:onClick="switchToGrid"
+            android:layout_below="@+id/button4x4"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="6 x 6"
+            android:tag="6"
+            android:id="@+id/button6x6"
+            android:onClick="switchToGrid"
+            android:layout_below="@+id/button5x5"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="7 x 7"
+            android:tag="7"
+            android:id="@+id/button7x7"
+            android:onClick="switchToGrid"
+            android:layout_below="@+id/button6x6"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="8 x 8"
+            android:tag="8"
+            android:id="@+id/button8x8"
+            android:onClick="switchToGrid"
+            android:layout_below="@+id/button7x7"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select Grid Size"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:editable="false"
+        android:elegantTextHeight="false"
+        android:password="false" />
+
+
+
+</RelativeLayout>
