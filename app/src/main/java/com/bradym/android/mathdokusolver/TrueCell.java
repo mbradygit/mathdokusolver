@@ -12,6 +12,9 @@ import com.bradym.android.mathdokusolver.logic.TrueVariable;
 
 /**
  * Created by Michael on 6/16/2015.
+ *
+ * Cell that contains two TextViews. One representing the constraint and another representing
+ * the actual value
  */
 public class TrueCell extends RelativeLayout {
 
@@ -20,7 +23,6 @@ public class TrueCell extends RelativeLayout {
     private Paint m0BorderPaint = new Paint();
     private Paint[] paints = new Paint[3];
 
-    Context cx;
     private TrueVariable var;
     private TextView constraintView;
     private TextView valueView;
@@ -53,7 +55,7 @@ public class TrueCell extends RelativeLayout {
 
         constraintView = new TextView(context);
         constraintView.setTextSize(10);
-        constraintView.setPadding(10,0,0,0);
+        constraintView.setPadding(10, 0, 0, 0);
         RelativeLayout.LayoutParams constraintLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         constraintLayout.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         constraintLayout.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -135,9 +137,11 @@ public class TrueCell extends RelativeLayout {
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (widthMeasureSpec > heightMeasureSpec) {
-            super.onMeasure(heightMeasureSpec, heightMeasureSpec);
+            int measure = MeasureSpec.makeMeasureSpec(heightMeasureSpec, MeasureSpec.EXACTLY);
+            super.onMeasure(measure, measure);
         } else {
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+            int measure = MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY);
+            super.onMeasure(measure, measure);
         }
     }
 

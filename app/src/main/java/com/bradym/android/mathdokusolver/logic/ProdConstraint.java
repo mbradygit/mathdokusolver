@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/3/2015.
+ *
+ * Constraint representing Product.
  */
 public class ProdConstraint extends TrueConstraint {
 
@@ -31,10 +33,7 @@ public class ProdConstraint extends TrueConstraint {
 
     public boolean validate(TrueVariable var, Integer val) {
         Integer top = partials.peekLast();
-        if ((top * val <= value) && (top * val * Math.pow(MAX_NUM, rem-1) >= value)) {
-            return true;
-        }
-        return false;
+        return ((top * val <= value) && (top * val * Math.pow(MAX_NUM, rem-1) >= value));
     }
 
     public void pop() {

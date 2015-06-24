@@ -7,6 +7,9 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/5/2015.
+ *
+ * Represents the All-Different Constraint
+ *
  */
 public class DiffConstraint extends TrueConstraint {
 
@@ -30,11 +33,7 @@ public class DiffConstraint extends TrueConstraint {
     }
 
     public boolean validate(TrueVariable var, Integer val) {
-        if (found[val-1] == 1) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(found[val-1] == 1);
     }
 
     public void pop() {
@@ -43,10 +42,6 @@ public class DiffConstraint extends TrueConstraint {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (TrueVariable tv : scope) {
-            sb.append(tv.toString() + "|");
-        }
         return "DIFFERENT CONSTRAINT | SCOPE = " + scope.toString() + " | " + Arrays.toString(found);
     }
 

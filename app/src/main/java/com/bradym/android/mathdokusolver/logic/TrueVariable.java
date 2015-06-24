@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/3/2015.
+ *
+ * Represents the variable used in the solving process
+ * Attached to a cell on the TrueGrid
+ *
  */
 public class TrueVariable {
 

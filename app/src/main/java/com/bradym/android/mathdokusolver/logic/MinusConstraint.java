@@ -8,6 +8,9 @@ import java.util.Map;
 
 /**
  * Created by Michael on 6/3/2015.
+ * Represents the Minus Constraint.
+ * Given n variables, any of the n can be the minuend of the difference yielding n possible values
+ *
  */
 public class MinusConstraint extends TrueConstraint {
 
@@ -104,7 +107,6 @@ public class MinusConstraint extends TrueConstraint {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
         return "MINUS CONSTRAINT | SCOPE = " + scope.toString() + " | " + partials.peekLast().toString();
     }
 

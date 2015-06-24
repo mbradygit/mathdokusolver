@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -13,6 +14,9 @@ import java.util.HashSet;
 
 /**
  * Created by Michael on 6/16/2015.
+ *
+ * Grid that represents the puzzle stage with touch interactions allowing the adding of constraints
+ *
  */
 public class TrueGrid extends GridLayout {
 
@@ -34,17 +38,11 @@ public class TrueGrid extends GridLayout {
             this.context = (Activity) context;
     }
 
-    private void init() {
-    }
-    public HashSet<TrueCell> getSelected() {
-        return selected;
-    }
-
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-                if (context != null) {
+                if (context != null && !selected.isEmpty()) {
                     TrueDialog sd = new TrueDialog();
                     sd.addParameters(selected, getColumnCount());
                     FragmentManager fm = context.getFragmentManager();
@@ -85,9 +83,11 @@ public class TrueGrid extends GridLayout {
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (widthMeasureSpec > heightMeasureSpec) {
-            super.onMeasure(heightMeasureSpec, heightMeasureSpec);
+            int measure = MeasureSpec.makeMeasureSpec(heightMeasureSpec, MeasureSpec.EXACTLY);
+            super.onMeasure(measure, measure);
         } else {
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+            int measure = MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY);
+            super.onMeasure(measure, measure);
         }
     }
 

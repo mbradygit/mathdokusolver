@@ -20,6 +20,8 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/19/2015.
+ *
+ * Activity that contains grid
  */
 public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDialogListener {
 
@@ -39,7 +41,7 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
         Intent intent = getIntent();
         num_col = intent.getIntExtra("size", num_col);
         trueGrid = (TrueGrid) findViewById(R.id.trueGrid);
-        trueCells = new ArrayList();
+        trueCells = new ArrayList<>();
         trueGrid.setColumnCount(num_col);
         trueGrid.setRowCount(num_col);
 
@@ -67,8 +69,8 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
 
         //Initialize Row/Column constraints
         for(int i = 0; i < num_col; i++) {
-            List<TrueVariable> rowVars = new ArrayList();
-            List<TrueVariable> colVars = new ArrayList();
+            List<TrueVariable> rowVars = new ArrayList<>();
+            List<TrueVariable> colVars = new ArrayList<>();
             for(int j = 0; j < num_col; j++) {
                 rowVars.add(variables[num_col*i + j]);
                 colVars.add(variables[i + num_col*j]);
@@ -141,7 +143,9 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
             nVars.add(cell);
             cell.invalidate();
         }
-        min.setConstraintString(tc.simpleString());
+        if (min != null) {
+            min.setConstraintString(tc.simpleString());
+        }
     }
 
     @Override
@@ -160,13 +164,8 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
 
         if (allConstrained) {
             TrueSolver solver = new TrueSolver(variables);
-            SolverTask st = new SolverTask(trueCells);
+            SolverTask st = new SolverTask(this, trueCells);
             st.execute(solver);
         }
-    }
-
-    @Override
-    public void onCancel() {
-
     }
 }

@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/3/2015.
+ *
+ * Abstract class that all Constraints inherit.
+ *
  */
 public abstract class TrueConstraint {
 

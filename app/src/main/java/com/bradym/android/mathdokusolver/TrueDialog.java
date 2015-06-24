@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,28 +25,23 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/19/2015.
+ *
+ * Dialog that allows the user to specify the constraint corresponding to the selected cells
  */
 public class TrueDialog extends DialogFragment implements View.OnClickListener {
 
     private String buffer = "";
-    private int operation = -1;
-    private String constraintValue = "";
 
     private TextView field;
 
-    private int plus = R.string.plus;
-    private int times = R.string.times;
-    private int div =  R.string.div;
-    private int minus = R.string.minus;
-
     private TrueDialogListener trueListener;
-    private List<TrueVariable> scope = new ArrayList();
+    private List<TrueVariable> scope = new ArrayList<>();
     private HashSet<TrueCell> cells;
 
-    private Button plusButton;
-    private Button minusButton;
-    private Button timesButton;
-    private Button divButton;
+    Button plusButton;
+    Button minusButton;
+    Button timesButton;
+    Button divButton;
 
 
     private int max;
@@ -64,9 +58,8 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
         // Build the dialog and set up the button click handlers
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Select the constraint");
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        //View inflated = inflater.inflate(R.layout.dialog_window, null);
-        View inflated = inflater.inflate(R.layout.true_dialog, null);
+
+        View inflated = View.inflate(getActivity(), R.layout.true_dialog, null);
 
         field = (TextView) inflated.findViewById(R.id.dialogTextView);
         inflated.findViewById(R.id.dialogButton0).setOnClickListener(this);
@@ -136,8 +129,11 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
             case R.id.dialogButton7:
             case R.id.dialogButton8:
             case R.id.dialogButton9:
-                buffer += ((TextView) v).getText();
-                field.setText(buffer);
+
+                if (buffer.length() < 9) {
+                    buffer += ((TextView) v).getText();
+                    field.setText(buffer);
+                }
                 break;
             case R.id.dialogButtonUndo:
                 buffer = buffer.length() > 0 ? buffer.substring(0, buffer.length() - 1) : buffer;
@@ -169,7 +165,6 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
 
     interface TrueDialogListener {
         void onPositiveClick(TrueConstraint tc, HashSet<TrueCell> cells);
-        void onCancel();
     }
 
     @Override

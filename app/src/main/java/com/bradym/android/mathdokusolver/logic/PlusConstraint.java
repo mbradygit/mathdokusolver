@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * Created by Michael on 6/3/2015.
+ *
+ * Constraint representing Plus.
+ *
+ *
  */
 public class PlusConstraint extends TrueConstraint {
 
@@ -32,10 +36,7 @@ public class PlusConstraint extends TrueConstraint {
 
     public boolean validate(TrueVariable var, Integer val) {
         Integer top = partials.peekLast();
-        if ((top + val + MIN_NUM * (rem - 1) <= value) && (top + val + MAX_NUM * (rem - 1) >= value)) {
-            return true;
-        }
-        return false;
+        return ((top + val + MIN_NUM * (rem - 1) <= value) && (top + val + MAX_NUM * (rem - 1) >= value));
     }
 
     public void pop() {
@@ -45,10 +46,6 @@ public class PlusConstraint extends TrueConstraint {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (TrueVariable tv : scope) {
-            sb.append(tv.toString() + "|");
-        }
         return "PLUS CONSTRAINT | SCOPE = " + scope.toString() + " | " + partials.peekLast().toString();
     }
 

@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32sp"
-            android:text="Large Text"
             android:id="@+id/dialogTextView"
             android:layout_weight="1"
             android:layout_span="3" />
@@ -32,7 +31,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1"
+            android:text="@string/one"
             android:textSize="24sp"
             android:id="@+id/dialogButton1"
             android:layout_column="0"
@@ -44,7 +43,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="2"
+            android:text="@string/two"
             android:background="?android:attr/selectableItemBackground"
             android:textSize="24sp"
             android:id="@+id/dialogButton2"
@@ -55,7 +54,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="3"
+            android:text="@string/three"
             android:background="?android:attr/selectableItemBackground"
             android:textSize="24sp"
             android:id="@+id/dialogButton3"
@@ -73,7 +72,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="4"
+            android:text="@string/four"
             android:textSize="24sp"
             android:id="@+id/dialogButton4"
             android:background="?android:attr/selectableItemBackground"
@@ -84,7 +83,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="5"
+            android:text="@string/five"
             android:textSize="24sp"
             android:id="@+id/dialogButton5"
             android:background="?android:attr/selectableItemBackground"
@@ -95,7 +94,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="6"
+            android:text="@string/six"
             android:textSize="24sp"
             android:id="@+id/dialogButton6"
             android:background="?android:attr/selectableItemBackground"
@@ -114,7 +113,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="7"
+            android:text="@string/seven"
             android:background="?android:attr/selectableItemBackground"
             android:id="@+id/dialogButton7"
             android:textSize="24sp"
@@ -125,7 +124,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="8"
+            android:text="@string/eight"
             android:background="?android:attr/selectableItemBackground"
             android:textSize="24sp"
             android:id="@+id/dialogButton8"
@@ -136,7 +135,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="9"
+            android:text="@string/nine"
             android:background="?android:attr/selectableItemBackground"
             android:textSize="24sp"
             android:id="@+id/dialogButton9"
@@ -154,7 +153,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/zero"
             android:textSize="24sp"
             android:id="@+id/dialogButton0"
             android:background="?android:attr/selectableItemBackground"
@@ -244,7 +243,6 @@
             android:text="@string/div"
             android:textSize="32sp"
             android:id="@+id/dialogButtonDiv"
-            android:onClick="dialogButton"
             android:background="?android:attr/selectableItemBackground"
             android:textColor="@color/material_deep_teal_500"
             android:paddingLeft="8dp"

@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="radioPlus" type="id"/>
-    <item name="radioTimes" type="id"/>
-    <item name="radioMinus" type="id"/>
-    <item name="radioDiv" type="id"/>
-
-
 </resources>

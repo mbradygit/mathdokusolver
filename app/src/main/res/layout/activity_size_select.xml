@@ -17,7 +17,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="4 x 4"
+            android:text="@string/x4"
             android:tag="4"
             android:id="@+id/button4x4"
             android:layout_alignParentTop="true"
@@ -27,7 +27,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="5 x 5"
+            android:text="@string/x5"
             android:tag="5"
             android:id="@+id/button5x5"
             android:onClick="switchToGrid"
@@ -37,7 +37,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="6 x 6"
+            android:text="@string/x6"
             android:tag="6"
             android:id="@+id/button6x6"
             android:onClick="switchToGrid"
@@ -47,7 +47,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="7 x 7"
+            android:text="@string/x7"
             android:tag="7"
             android:id="@+id/button7x7"
             android:onClick="switchToGrid"
@@ -57,11 +57,21 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="8 x 8"
+            android:text="@string/x8"
             android:tag="8"
             android:id="@+id/button8x8"
             android:onClick="switchToGrid"
             android:layout_below="@+id/button7x7"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/x9"
+            android:tag="9"
+            android:id="@+id/button9x9"
+            android:onClick="switchToGrid"
+            android:layout_below="@+id/button8x8"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
@@ -70,13 +80,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Select Grid Size"
+        android:text="@string/GRID_SELECT"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:editable="false"
-        android:elegantTextHeight="false"
-        android:password="false" />
+        android:layout_centerHorizontal="true" />
 
 
 

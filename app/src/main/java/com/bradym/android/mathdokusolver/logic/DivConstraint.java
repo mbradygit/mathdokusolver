@@ -8,6 +8,10 @@ import java.util.Map;
 
 /**
  * Created by Michael on 6/3/2015.
+ *
+ * Represents Constraint based on Division.
+ * Given n variables, any of the n can be the numerator of the quotient yielding n possible values
+ *
  */
 public class DivConstraint extends TrueConstraint {
 
@@ -134,7 +138,6 @@ public class DivConstraint extends TrueConstraint {
     }
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
         return "DIV CONSTRAINT " + value + " | SCOPE = " + scope.toString() + " | " + partials.peekLast().toString();
     }
 
