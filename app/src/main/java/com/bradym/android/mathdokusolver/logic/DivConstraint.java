@@ -15,8 +15,8 @@ import java.util.Map;
  */
 public class DivConstraint extends TrueConstraint {
 
-    final Deque<Map<TrueVariable, Fraction>> partials;
-    int rem = scope.size();
+    private final Deque<Map<TrueVariable, Fraction>> partials;
+    private int rem = scope.size();
 
     public DivConstraint(int value, List<TrueVariable> scope, int max) {
 
@@ -102,6 +102,17 @@ public class DivConstraint extends TrueConstraint {
         }
         return false;
     }
+
+    public void restore() {
+        partials.clear();
+        Map<TrueVariable, Fraction> map = new HashMap<>();
+        for (TrueVariable tv : scope) {
+            map.put(tv, new Fraction());
+        }
+        partials.addLast(map);
+        rem = scope.size();
+    }
+
     public void pop() {
         partials.pollLast();
         rem++;

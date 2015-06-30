@@ -46,14 +46,18 @@ public class SolverTask extends AsyncTask<TrueSolver, Void, Long>{
         if (pg.isShowing()) {
             pg.dismiss();
         }
-        if (result == -1) {
+        if (result == -1L) {
             Toast.makeText(activity, "Unable to solve", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(activity, "Solved in " + result + " ms", Toast.LENGTH_SHORT).show();
+            for (TrueCell tc : trueCells) {
+                tc.refreshValue();
+            }
+
+
+
         }
-        for (TrueCell tc : trueCells) {
-            tc.refreshValue();
-        }
+
     }
 }

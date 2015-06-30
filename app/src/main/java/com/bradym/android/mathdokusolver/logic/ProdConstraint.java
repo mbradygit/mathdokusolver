@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ProdConstraint extends TrueConstraint {
 
-    final Deque<Integer> partials;
+    private final Deque<Integer> partials;
     private int rem;
 
     public ProdConstraint(int value, List<TrueVariable> scope, int max) {
@@ -34,6 +34,12 @@ public class ProdConstraint extends TrueConstraint {
     public boolean validate(TrueVariable var, Integer val) {
         Integer top = partials.peekLast();
         return ((top * val <= value) && (top * val * Math.pow(MAX_NUM, rem-1) >= value));
+    }
+
+    public void restore() {
+        partials.clear();
+        partials.addLast(1);
+        rem = scope.size();
     }
 
     public void pop() {

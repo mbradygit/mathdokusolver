@@ -46,6 +46,8 @@ public abstract class TrueConstraint {
 
     public abstract void pop();
 
+    public abstract void restore();
+
     public abstract boolean updateVariable(TrueVariable v);
 
     public abstract boolean validate(TrueVariable v, Integer d);

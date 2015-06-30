@@ -9,6 +9,7 @@
     <string name="times">\u00D7</string>
     <string name="div">\u00F7</string>
     <string name="minus">\u2212</string>
+    <string name="Cancel">Close</string>
     <string name="equals"></string>
     <string name="undo">\u2326</string>
     <string name="ALLDIFF"></string>

@@ -9,17 +9,48 @@
         android:layout_marginTop="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginLeft="24dp">
-    <TableRow android:paddingBottom="16dp">
+    <TableRow android:paddingBottom="16dp"
+        android:weightSum="8">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:layout_span="3"
+            android:layout_gravity="center_vertical"
+            >
 
 
         <TextView
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="32sp"
+            android:textAlignment="center"
             android:id="@+id/dialogTextView"
+
+            />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/material_blue_grey_800"
+                android:layout_alignBottom="@id/dialogTextView"/>
+
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/dialogButtonUndo"
+            android:layout_column="2"
             android:layout_weight="1"
-            android:layout_span="3" />
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_launcher"
+            android:hapticFeedbackEnabled="true"
+            />
     </TableRow>
 
         <TableRow
@@ -169,15 +200,17 @@
             android:layout_weight="1"
 
             />
+
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:id="@+id/dialogButtonUndo"
+            android:id="@+id/deleteButton"
+            android:src="@mipmap/trash"
+            android:background="@android:color/transparent"
             android:layout_column="2"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"
-            android:hapticFeedbackEnabled="true"/>
+             />
+
 
 
     </TableRow>

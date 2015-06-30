@@ -78,7 +78,9 @@ public class TrueCell extends RelativeLayout {
         m1BorderPaint.setColor(Color.BLACK);
         paints[1] = m1BorderPaint;
 
+        m0BorderPaint.setStyle(Paint.Style.STROKE);
         m0BorderPaint.setColor(Color.BLACK);
+        m0BorderPaint.setStrokeWidth(1);
         paints[0] = m0BorderPaint;
 
 
@@ -99,6 +101,11 @@ public class TrueCell extends RelativeLayout {
 
     public TrueVariable getVariable() {
         return var;
+    }
+
+    public void resetValue() {
+        this.valueView.setText("");
+        this.var.value = -1;
     }
 
     public void setValue(String s) {
@@ -134,16 +141,25 @@ public class TrueCell extends RelativeLayout {
         this.down = Math.max(this.down, down);
     }
 
-    @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (widthMeasureSpec > heightMeasureSpec) {
-            int measure = MeasureSpec.makeMeasureSpec(heightMeasureSpec, MeasureSpec.EXACTLY);
-            super.onMeasure(measure, measure);
-        } else {
-            int measure = MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY);
-            super.onMeasure(measure, measure);
-        }
+    public void select() {
+        setBackgroundColor(Color.LTGRAY);
     }
+
+    public void unSelect() {
+        setBackgroundColor(Color.TRANSPARENT);
+    }
+
+
+//    @Override
+//    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        if (widthMeasureSpec > heightMeasureSpec) {
+//            int measure = MeasureSpec.makeMeasureSpec(heightMeasureSpec, MeasureSpec.EXACTLY);
+//            super.onMeasure(measure, measure);
+//        } else {
+//            int measure = MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY);
+//            super.onMeasure(measure, measure);
+//        }
+//    }
 
 
 

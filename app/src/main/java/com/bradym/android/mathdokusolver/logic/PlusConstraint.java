@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PlusConstraint extends TrueConstraint {
 
-    final Deque<Integer> partials;
+    private final Deque<Integer> partials;
     private int rem;
 
     public PlusConstraint(int value, List<TrueVariable> scope, int max) {
@@ -37,6 +37,12 @@ public class PlusConstraint extends TrueConstraint {
     public boolean validate(TrueVariable var, Integer val) {
         Integer top = partials.peekLast();
         return ((top + val + MIN_NUM * (rem - 1) <= value) && (top + val + MAX_NUM * (rem - 1) >= value));
+    }
+
+    public void restore() {
+        partials.clear();
+        partials.addLast(0);
+        rem = scope.size();
     }
 
     public void pop() {

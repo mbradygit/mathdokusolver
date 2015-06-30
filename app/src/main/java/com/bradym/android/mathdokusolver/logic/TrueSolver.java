@@ -5,9 +5,9 @@ import android.util.Log;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -18,7 +18,7 @@ import java.util.Queue;
  */
 public class TrueSolver {
 
-    final Deque<TrueVariable> unassigned;
+    final List<TrueVariable> variables;
     final Cupe cupe;
     final Queue<TrueConstraint> GACQueue = new ArrayDeque<>();
 
@@ -35,14 +35,14 @@ public class TrueSolver {
     long enforceGACCleanUpTime = 0L;
 
     public TrueSolver(TrueVariable[] variables) {
-        this.unassigned = new ArrayDeque<>(variables.length);
-        this.unassigned.addAll(Arrays.asList(variables));
+        this.variables = new ArrayList<>(variables.length);
+        this.variables.addAll(Arrays.asList(variables));
         this.cupe = new Cupe(variables, variables[0].domain.size());
     }
 
     public long solveGAC() {
         long s = System.currentTimeMillis();
-        GAC();
+        boolean success = GAC();
         solveTime = System.currentTimeMillis() - s;
 
         Log.d("UPDATE VARIABLE TIME", updateVariableTime + "");
@@ -56,10 +56,20 @@ public class TrueSolver {
         Log.d("ENFORCE GAC CLEAN UP", enforceGACCleanUpTime + "");
 
         Log.d("FULL SOLVE", solveTime + "");
-
-
         GACQueue.clear();
-        return solveTime;
+
+
+        if(success == false) {
+            return -1;
+        } else {
+            for (TrueVariable tv : variables) {
+                tv.completeRestore();
+                for (TrueConstraint tc : tv.constraints) {
+                    tc.restore();
+                }
+            }
+            return solveTime;
+        }
     }
 
     private boolean GAC() {

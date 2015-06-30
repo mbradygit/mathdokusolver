@@ -14,8 +14,8 @@ import java.util.Map;
  */
 public class MinusConstraint extends TrueConstraint {
 
-    final Deque<Map<TrueVariable, Difference>> partials;
-    int rem;
+    private final Deque<Map<TrueVariable, Difference>> partials;
+    private int rem;
 
     public MinusConstraint(int value, List<TrueVariable> scope, int max) {
         super(value, scope, max);
@@ -98,6 +98,16 @@ public class MinusConstraint extends TrueConstraint {
             }
         }
         return false;
+    }
+
+    public void restore() {
+        partials.clear();
+        Map<TrueVariable, Difference> map = new HashMap<>();
+        for (TrueVariable tv : scope) {
+            map.put(tv, new Difference());
+        }
+        partials.addLast(map);
+        rem = scope.size();
     }
 
     public void pop() {

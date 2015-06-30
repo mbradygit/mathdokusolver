@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class DiffConstraint extends TrueConstraint {
 
-    int[] found;
-    Deque<Integer> prev;
+    private int[] found;
+    private Deque<Integer> prev;
 
     public DiffConstraint(List<TrueVariable> scope) {
         super(-1, scope, scope.size());
@@ -34,6 +34,11 @@ public class DiffConstraint extends TrueConstraint {
 
     public boolean validate(TrueVariable var, Integer val) {
         return !(found[val-1] == 1);
+    }
+
+    public void restore() {
+        Arrays.fill(found, 0);
+        prev.clear();
     }
 
     public void pop() {

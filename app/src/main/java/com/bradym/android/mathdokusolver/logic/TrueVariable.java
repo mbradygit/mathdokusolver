@@ -20,12 +20,14 @@ public class TrueVariable {
     public final String name;
     public final List<TrueConstraint> constraints = new ArrayList<>();
     public final List<Integer> domain = new ArrayList<>();
-    public final Deque<List<Integer>> pruned = new ArrayDeque<>();
-    List<Integer> toPush = new ArrayList<>();
-
     public final TrueCell cell;
 
     public int value = -1;
+
+    private final Deque<List<Integer>> pruned = new ArrayDeque<>();
+    private List<Integer> toPush = new ArrayList<>();
+
+
 
     public TrueVariable(String name, List<Integer> domain, TrueCell cell) {
         this.name = name;
@@ -33,14 +35,8 @@ public class TrueVariable {
         this.cell = cell;
     }
 
-    public void prune(Integer val) {
-        domain.remove(val);
-        flagPruned(val);
-    }
-
     public void flagPruned(Integer val) {
         toPush.add(val);
-        //pruned.add(val);
     }
 
     public void assign(Integer val) {
@@ -68,6 +64,12 @@ public class TrueVariable {
         toPush = new ArrayList<>();
     }
 
+    public void completeRestore() {
+        while (!toPush.isEmpty() && !pruned.isEmpty()) {
+            restore();
+        }
+    }
+
     public void restore() {
         if (toPush.isEmpty()) {
             for (Integer i : pruned.pollLast()) {
@@ -88,6 +90,6 @@ public class TrueVariable {
 
     public String detail() {
         return "NAME: " + name + " DOMAIN: " + domain + " VALUE " + value;
-    }
+}
 
 }

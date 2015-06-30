@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bradym.android.mathdokusolver.logic.DivConstraint;
@@ -43,15 +44,29 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
     Button timesButton;
     Button divButton;
 
+    ImageButton trashButton;
+
 
     private int max;
+    private int action;
+    private TrueConstraint prevConstraint;
+    private ConstraintState newState = null;
 
-    public void addParameters(HashSet<TrueCell> scope, int max) {
+    public void addParameters(HashSet<TrueCell> scope, int max, int action) {
         for (TrueCell tc : scope) {
             this.scope.add(tc.getVariable());
         }
         this.max = max;
         this.cells = scope;
+        this.action = action;
+        this.newState = new ConstraintState(action);
+    }
+
+    public void addParameters(TrueConstraint tc, int action) {
+        this.prevConstraint = tc;
+        this.action = action;
+        this.newState = new ConstraintState(action, tc);
+        this.scope = tc.scope;
     }
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
@@ -85,14 +100,17 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
         divButton = (Button) inflated.findViewById(R.id.dialogButtonDiv);
         divButton.setOnClickListener(this);
 
+        trashButton = (ImageButton) inflated.findViewById(R.id.deleteButton);
+        trashButton.setOnClickListener(this);
 
-        if (scope.size() == 1) {
-            adjustButtons(true, plusButton);
-            adjustButtons(false,timesButton, divButton, minusButton );
-        } else if (scope.size() > 1) {
-            adjustButtons(true, plusButton, timesButton, divButton, minusButton);
+
+
+
+        adjustButtons(false, plusButton, timesButton, divButton, minusButton);
+
+        if (action != ConstraintState.EDIT) {
+            adjustButtons(false, trashButton);
         }
-
 
         inflated.findViewById(R.id.dialogButtonUndo).setOnClickListener(this);
 
@@ -107,6 +125,20 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
             } else {
                 b.setClickable(false);
                 b.setTextColor(b.getTextColors().withAlpha(64));
+
+            }
+        }
+    }
+
+    public void adjustButtons(boolean enable, ImageButton ... buttons) {
+        for (ImageButton b : buttons) {
+            if (enable) {
+                b.setClickable(true);
+                b.setAlpha(1.0f);
+            } else {
+                b.setClickable(false);
+                b.setAlpha(0.25f);
+
 
             }
         }
@@ -134,37 +166,62 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
                     buffer += ((TextView) v).getText();
                     field.setText(buffer);
                 }
+
+                if (buffer.length() == 1) {
+                    if (scope.size() == 1) {
+                        adjustButtons(true, plusButton);
+                    } else if (scope.size() > 1) {
+                        adjustButtons(true, plusButton, timesButton, divButton, minusButton);
+                    }
+                }
+
+
+
                 break;
             case R.id.dialogButtonUndo:
                 buffer = buffer.length() > 0 ? buffer.substring(0, buffer.length() - 1) : buffer;
                 field.setText(buffer);
 
+                if (buffer.length() == 0) {
+                    adjustButtons(false,plusButton, timesButton, divButton, minusButton );
+                }
+
                 break;
             case R.id.dialogButtonDiv:
                 tc = new DivConstraint(Integer.parseInt(buffer), scope, max);
-                trueListener.onPositiveClick(tc, cells);
+                //trueListener.onPositiveClick(tc, cells);
+                newState.addConstraints(tc);
+                trueListener.onPositiveClick(newState);
                 dismiss();
                 break;
             case R.id.dialogButtonPlus:
                 tc = new PlusConstraint(Integer.parseInt(buffer), scope, max);
-                trueListener.onPositiveClick(tc, cells);
+                newState.addConstraints(tc);
+                trueListener.onPositiveClick(newState);
                 dismiss();
                 break;
             case R.id.dialogButtonMinus:
                 tc = new MinusConstraint(Integer.parseInt(buffer), scope, max);
-                trueListener.onPositiveClick(tc, cells);
+                newState.addConstraints(tc);
+                trueListener.onPositiveClick(newState);
                 dismiss();
                 break;
             case R.id.dialogButtonTimes:
                 tc = new ProdConstraint(Integer.parseInt(buffer), scope, max);
-                trueListener.onPositiveClick(tc, cells);
+                newState.addConstraints(tc);
+                trueListener.onPositiveClick(newState);
+                dismiss();
+                break;
+            case R.id.deleteButton:
+                newState.setAction(ConstraintState.DELETE);
+                trueListener.onPositiveClick(newState);
                 dismiss();
                 break;
         }
     }
 
     interface TrueDialogListener {
-        void onPositiveClick(TrueConstraint tc, HashSet<TrueCell> cells);
+        void onPositiveClick(ConstraintState cs);
     }
 
     @Override
@@ -180,10 +237,25 @@ public class TrueDialog extends DialogFragment implements View.OnClickListener {
 
     @Override
     public void dismiss() {
-        for (TrueCell tc : cells) {
-            tc.setBackgroundColor(Color.TRANSPARENT);
+        switch (action) {
+            case ConstraintState.EDIT:
+                for (TrueVariable tv : prevConstraint.scope) {
+                    tv.cell.setBackgroundColor(Color.TRANSPARENT);
+                }
+                break;
+
+            case ConstraintState.DELETE:
+                break;
+
+            case ConstraintState.ADD:
+                for (TrueCell tc : cells) {
+                    tc.setBackgroundColor(Color.TRANSPARENT);
+                }
+                cells.clear();
+                break;
         }
-        cells.clear();
+
+
         super.dismiss();
     }
 
