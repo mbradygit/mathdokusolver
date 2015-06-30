@@ -1,7 +1,5 @@
 package com.bradym.android.mathdokusolver.logic;
 
-import android.util.Log;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,17 +43,17 @@ public class TrueSolver {
         boolean success = GAC();
         solveTime = System.currentTimeMillis() - s;
 
-        Log.d("UPDATE VARIABLE TIME", updateVariableTime + "");
-        Log.d("VALIDATE TIME", validateTime + "");
-        Log.d("ENFORCE GAC TIME", enforceGACTime + "");
-        Log.d("RESTORE TIME", restoreTime + "");
-        Log.d("VALUE CLEANUP TIME", valueCleanUpTime + "");
-
-        Log.d("ENFORCE GAC VALIDATE", enforceGACValidateTime + "");
-        Log.d("ENFORCE GAC PRUNE", enforceGACPruneTime + "");
-        Log.d("ENFORCE GAC CLEAN UP", enforceGACCleanUpTime + "");
-
-        Log.d("FULL SOLVE", solveTime + "");
+//        Log.d("UPDATE VARIABLE TIME", updateVariableTime + "");
+//        Log.d("VALIDATE TIME", validateTime + "");
+//        Log.d("ENFORCE GAC TIME", enforceGACTime + "");
+//        Log.d("RESTORE TIME", restoreTime + "");
+//        Log.d("VALUE CLEANUP TIME", valueCleanUpTime + "");
+//
+//        Log.d("ENFORCE GAC VALIDATE", enforceGACValidateTime + "");
+//        Log.d("ENFORCE GAC PRUNE", enforceGACPruneTime + "");
+//        Log.d("ENFORCE GAC CLEAN UP", enforceGACCleanUpTime + "");
+//
+//        Log.d("FULL SOLVE", solveTime + "");
         GACQueue.clear();
 
 
@@ -76,7 +74,7 @@ public class TrueSolver {
         long s;
         boolean allAssigned = cupe.pls.size() == 0;
         if (allAssigned) {
-            Log.d("ALL ASSIGNED", "MUCH WOW");
+            //Log.d("ALL ASSIGNED", "MUCH WOW");
             return true;
         }
 

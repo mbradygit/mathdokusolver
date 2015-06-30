@@ -200,6 +200,7 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
             adjustButtons(false, redoButton);
             adjustButtons(false, undoButton);
             adjustButtons(false, solverButton);
+            trueGrid.editable = false;
 
         } else {
             checkSolverButton();
@@ -227,6 +228,7 @@ public class TrueActivity extends ActionBarActivity implements TrueDialog.TrueDi
 
         history.offerLast(state);
         undoHistory.clear();
+        trueGrid.editable = true;
         adjustButtons(false, redoButton);
         adjustButtons(true, undoButton);
         checkSolverButton();

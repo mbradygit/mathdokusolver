@@ -65,7 +65,7 @@ public class TrueVariable {
     }
 
     public void completeRestore() {
-        while (!toPush.isEmpty() && !pruned.isEmpty()) {
+        while (!toPush.isEmpty() || !pruned.isEmpty()) {
             restore();
         }
     }

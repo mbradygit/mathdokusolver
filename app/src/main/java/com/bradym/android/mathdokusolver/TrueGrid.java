@@ -30,6 +30,7 @@ public class TrueGrid extends GridLayout {
 
     HashSet<TrueCell> selected = new HashSet<>();
     TrueConstraint selectedConstraint = null;
+    boolean editable = true;
 
     Activity context;
     FragmentManager fm;
@@ -51,6 +52,10 @@ public class TrueGrid extends GridLayout {
             this.context = (Activity) context;
             fm = this.context.getFragmentManager();
         }
+    }
+
+    public void emptyActiveConstraints() {
+        activeConstraints.clear();
     }
 
     @Override
@@ -83,6 +88,12 @@ public class TrueGrid extends GridLayout {
                     tc.unSelect();
                 }
                 selected.clear();
+                if (selectedConstraint != null) {
+                    for (TrueVariable tv : selectedConstraint.scope) {
+                        tv.cell.unSelect();
+                    }
+                }
+
                 return true;
 
             case MotionEvent.ACTION_DOWN:
@@ -96,7 +107,7 @@ public class TrueGrid extends GridLayout {
                             selectionMode = CELLS;
                             selected.add(cell);
                             cell.select();
-                        } else {
+                        } else if (editable) {
                             selectionMode = CONSTRAINTS;
                             selectedConstraint = var.constraints.get(2);
                             for (TrueVariable tv : selectedConstraint.scope) {
